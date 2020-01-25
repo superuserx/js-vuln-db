@@ -7,13 +7,14 @@ then
 fi
 
 MOD_PATH=$1
+DB_PATH=$(pwd)/cve_db
 
-mkdir $MOD_PATH/CVE_PoC && cd $MOD_PATH/CVE_PoC
+mkdir $MOD_PATH/CVE_DB && cd $MOD_PATH/CVE_DB
 
-for ENGINE in $(ls)
+for ENGINE in $(ls $DB_PATH)
 do
 	mkdir $ENGINE && cd $ENGINE
-	for CVE_DIR in $(ls $ENGINE)
+	for CVE_DIR in $(ls $DB_PATH/$ENGINE)
 	do
 		CVE=${CVE_DIR%.*}
 		if [ "$CVE" != "TODO" ]
@@ -50,7 +51,7 @@ beef:
 EOF
 
 			# make command.js
-			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $ENGINE/$CVE_DIR)	
+			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $CVE_DB/$ENGINE/$CVE_DIR)	
 			cat > command.js << EOF
 # $CVE PoC
 
