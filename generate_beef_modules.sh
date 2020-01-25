@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$#" -ne 2 ]
+if [ "$#" -ne 1 ]
 then
 	echo "Usage: generate_beef_modules.sh path/to/beef/modules"
 	exit
