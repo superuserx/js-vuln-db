@@ -52,7 +52,7 @@ EOF
 
 			# make command.js
 			# CVE_SCRIPT=$(grep -Pzo '(?<=```javascript)([\s\S]*)(?=```)' $DB_PATH/$ENGINE/$CVE_DIR)
-			CVE_SCRIPT=$(cat $DB_PATH/$ENGINE/$CVE_DIR | sed -n '/^javascript/,/^/p' | sed '/javascript/d' | sed '//d')	
+			CVE_SCRIPT=$(cat $DB_PATH/$ENGINE/$CVE_DIR | sed -n '/^```/,/^```/p' | sed '/```javascript/d' | sed '/```/d')	
 			cat > command.js << EOF
 # $CVE PoC
 
