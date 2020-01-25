@@ -1,15 +1,19 @@
 #!/bin/bash
 
-DB_PATH="/home/alex/Repos/js-vuln-db"
-#MOD_PATH="/home/alex/Repos/beef/modules/CVE_DB"
-MOD_PATH="/home/alex/CVE_DB"
+if [ "$#" -ne 2 ]
+then
+	echo "Usage: generate_beef_modules.sh path/to/beef/modules"
+	exit
+fi
 
-mkdir $MOD_PATH && cd $MOD_PATH
+MOD_PATH=$1
 
-for ENGINE in $(ls $DB_PATH)
+mkdir $MOD_PATH/CVE_PoC && cd $MOD_PATH/CVE_PoC
+
+for ENGINE in $(ls)
 do
 	mkdir $ENGINE && cd $ENGINE
-	for CVE_DIR in $(ls $DB_PATH/$ENGINE)
+	for CVE_DIR in $(ls $ENGINE)
 	do
 		CVE=${CVE_DIR%.*}
 		if [ "$CVE" != "TODO" ]
@@ -46,7 +50,7 @@ beef:
 EOF
 
 			# make command.js
-			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $DB_PATH/$ENGINE/$CVE_DIR)	
+			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $ENGINE/$CVE_DIR)	
 			cat > command.js << EOF
 # $CVE PoC
 
