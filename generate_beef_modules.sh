@@ -51,7 +51,7 @@ beef:
 EOF
 
 			# make command.js
-			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $CVE_DB/$ENGINE/$CVE_DIR)	
+			CVE_SCRIPT=$(grep -Pzoq '(?<=```javascript)([\s\S]*)(?=```)' $DB_PATH/$ENGINE/$CVE_DIR)	
 			cat > command.js << EOF
 # $CVE PoC
 
