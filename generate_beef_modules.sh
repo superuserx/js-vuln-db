@@ -42,9 +42,9 @@ beef:
    module:
       $(sed 's/-/_/g' <<< $CVE):
          enable: true
-         category: ["CVE_DB", "$ENGINE"]
+         category: ["Cve_db", "$ENGINE"]
          name: "$CVE"
-	 description: "PoC from the collection of JavaScript engine CVEs"
+         description: "PoC from the collection of JavaScript engine CVEs"
          authors: ""
          target:
             working: ["ALL"]
