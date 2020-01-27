@@ -21,9 +21,12 @@ do
 		then
 			mkdir $CVE && cd $CVE
 
-			# make module.rb
+			# make module.rb (only first char of class name has to be uppercase)
+			FIRST_CHAR=$(cut -c 1 <<< $CVE)
+			REST=$(cut -c 2- <<< $CVE | tr '[:upper:]' '[:lower:]' | tr '[=-=]' '_')
+			RESULT=$FIRST_CHAR$REST
 			cat > module.rb << EOF 
-class $(sed 's/-/_/g; s/V/v/g; s/E/e/g;' <<< $CVE) < BeEF::Core::Command
+class $RESULT < BeEF::Core::Command
 
   def post_execute
     content = {}
