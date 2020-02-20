@@ -29,12 +29,12 @@ do
 class $RESULT < BeEF::Core::Command
 
   def post_execute
-    content = {}
-    content['output'] = @datastore['output'] unless @datastore['output'].nil?
-    if content.empty?
-      content['fail'] = 'Failed'
-    end
-    save content
+  end
+
+  def pre_send
+  end
+
+  def post_execute
   end
 
 end
